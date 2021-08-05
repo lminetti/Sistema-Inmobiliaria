@@ -1,0 +1,360 @@
+﻿body {
+    margin: 0;
+    font-family: 'Segoe UI';
+    background-color:#eeeeee;
+}
+.parent{
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+}
+.contenedor_login {
+    background-color:#fff;
+    width: 40%;
+    height: 80vh;
+    margin-top: 10vh;
+    margin-left: 30%;
+    box-shadow: 0px 0px 20px #808080;
+    border-radius: 4px;
+    position:relative;
+}
+.logo{
+    width:100%;
+    height:130px;
+    padding-top:10vh;
+    text-align:center;
+}
+.login_textbox {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #808080;
+    height: 50px;
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 50px;
+    color: #000;
+    background-color: #fff;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+.login_textbox:hover{
+    border-bottom:1px solid #000;
+    transition: all 0.2s ease;
+}
+.login_button {
+    outline: none;
+    border: 1px solid #1e1e1e;
+    height: 50px;
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 30px;
+    color: #fff;
+    background-color: #1e1e1e;
+    font-size: 16px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px #808080;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+.login_button:hover{
+    background-color:#fff;
+    color:#000;
+    transition: all 0.2s ease;
+}
+.login_footer{
+    width:90%;
+    left:5%;
+    position:absolute;
+    bottom:40px;
+    color:#808080;
+    font-size:14px;
+    text-align:center;
+}
+.contenedor_panel {
+    background-color: #fff;
+    width: 95%;
+    height: 95vh;
+    margin-top: 2.5vh;
+    margin-left: 2.5%;
+    box-shadow: 0px 0px 20px #808080;
+    border-radius: 4px;
+    position: relative;
+}
+.sandwich {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    display: table;
+    position: absolute;
+    left: 2%;
+    top: 2%;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0px 0px 20px #808080;
+    z-index:10;
+}
+.sandwich a{
+    display:table-cell;
+    vertical-align:middle;
+    user-select: none;
+}
+.sandwich:hover{
+    background-color:#fff;
+    color:#000;
+    transition: all 0.2s ease;
+}
+.closemenu {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    display: table;
+    position: absolute;
+    right: 4%;
+    top: 2%;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0px 0px 20px #000;
+}
+.closemenu a{
+    display:table-cell;
+    vertical-align:middle;
+    user-select: none;
+}
+.closemenu:hover{
+    background-color:#000;
+    color:#fff;
+    transition: all 0.2s ease;
+}
+.menu {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 30%;
+    background-color: #1e1e1e;
+    border-radius: 4px;
+    z-index: 20;
+}
+.menu_titulo{
+    margin-top:5%;
+    margin-left:4%;
+    font-size:22px;
+    color:#fff;
+    font-weight:800;
+}
+.menu_subtitulo {
+    margin-top: 2%;
+    margin-left: 4%;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 600;
+}
+.botonera {
+    margin-top: 10%;
+    margin-left: 4%;
+    width:80%;
+    height:auto;
+}
+.boton_menu {
+    margin-top: 4%;
+    width: 100%;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: all 0.2s ease;
+    background-color: #000;
+    text-align: left;
+    height: 30px;
+    box-shadow: 0px 0px 60px #000;
+}
+.boton_menu:hover{
+    color:#000;
+    background-color:#fff;
+    transition: all 0.2s ease;
+}
+.cerrar_sesion {
+    width: 80%;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    transition: all 0.2s ease;
+    background-color: #bf2121;
+    text-align: left;
+    height: 30px;
+    box-shadow: 0px 0px 60px #000;
+    position:absolute;
+    left:4%;
+    bottom:10%;
+}
+.cerrar_sesion:hover{
+    background-color:#6d1515;
+    transition: all 0.2s ease;
+}
+.hola {
+    border: none;
+    outline: none;
+    background-color: #fff;
+    color: #000;
+    font-size: 14px;
+    position: absolute;
+    right: 2%;
+    top: 3%;
+    text-align: right;
+}
+.aspnetpanel{
+    display:none;
+}
+.panel{
+    width:95%;
+    height:85%;
+    position:absolute;
+    left:2.5%;
+    top:10%;
+    border:1px solid #eeeeee;
+}
+.panel_titulo{
+    width:100%;
+    position:absolute;
+    display:table;
+    text-align:center;
+    font-size:22px;
+    font-weight:600;
+    color:#000;
+    top:-45px;
+}
+.panel_titulo a{
+    display:table-cell;
+}
+.contenedor_campos{
+    width:90%;
+    margin: 0 auto;
+    border-bottom:1px solid #808080;
+    height:30%;
+    position:relative;
+}
+.campo {
+    width: 20%;
+    margin:2%;
+    height: 40px;
+    background-color: #eeeeee;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 5px #cecece;
+    transition: all 0.2s ease;
+    font-size:14px;
+    color:#000;
+    text-align:left;
+    padding-left:4px;
+}
+.campo:hover{
+    background-color: #fff;
+    transition: all 0.2s ease;
+}
+.boton_ingresar {
+    width: 20%;
+    height: 40px;
+    background-color: #236f1f;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 5px #cecece;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+    display:block;
+    position:absolute;
+    bottom:5%;
+    right:0;
+}
+.boton_ingresar:hover{
+    background-color: #153913;
+    transition: all 0.2s ease;
+}
+.contenedor_gridview {
+    width: 90%;
+    margin: 0 auto;
+    margin-top:5%;
+    max-height: 60%;
+    overflow: auto;
+    box-shadow: 0px 0px 5px #cecece;
+    position:relative;
+}
+.gridview1 {
+    width: 100%;
+    font-size: 16px;
+}
+.grid_row {
+    height: 50px;
+}
+.col {
+    word-wrap: break-word;
+    width: auto;
+    padding: 5px;
+}
+.gridview_header {
+    text-align: left;
+    padding: 5px;
+}
+.contenedor_acciones{
+    position:absolute;
+    width:40%;
+    right:5%;
+    top:32%;
+}
+.boton_editar {
+    float: right;
+    width: 30%;
+    height: 30px;
+    background-color: #262626;
+    color: #fff;
+    outline: none;
+    border: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    box-shadow: 0px 0px 5px #cecece;
+    cursor:pointer;
+    font-weight:600;
+    margin-right:5px;
+}
+.boton_editar:hover{
+    background-color: #000;
+    transition: all 0.2s ease;
+}
+.boton_borrar {
+    float: right;
+    width: 30%;
+    height: 30px;
+    background-color: #bf2121;
+    color: #fff;
+    outline: none;
+    border: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    box-shadow: 0px 0px 5px #cecece;
+    cursor:pointer;
+    font-weight:600;
+}
+.boton_borrar:hover{
+    background-color: #6d1515;
+    color: #fff;
+    transition: all 0.2s ease;
+}
