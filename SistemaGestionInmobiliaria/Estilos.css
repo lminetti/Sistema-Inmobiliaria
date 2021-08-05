@@ -138,6 +138,34 @@
     color:#fff;
     transition: all 0.2s ease;
 }
+.closepanel {
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    background-color: #262626;
+    color: #fff;
+    text-align: center;
+    display: table;
+    position: absolute;
+    right: 1%;
+    top: 8%;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0px 0px 6px #cecece;
+    z-index: 20;
+    display: none;
+}
+.closepanel a{
+    display:table-cell;
+    vertical-align:middle;
+    user-select: none;
+}
+.closepanel:hover{
+    background-color:#000;
+    transition: all 0.2s ease;
+}
 .menu {
     position: absolute;
     left: 0;
@@ -265,6 +293,32 @@
 }
 .campo:hover{
     background-color: #fff;
+    transition: all 0.2s ease;
+}
+.reload {
+    width: 30px;
+    height: 30px;
+    background-color: #236f1f;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #cecece;
+    transition: all 0.2s ease;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 40px;
+    display: table;
+    text-align: center;
+    border: none;
+    outline: none;
+    position: absolute;
+    bottom: 6%;
+    right: 22%;
+}
+.reload a{
+    display:table-cell;
+    vertical-align:middle;
+}
+.reload:hover{
+    background-color:#153913;
     transition: all 0.2s ease;
 }
 .boton_ingresar {

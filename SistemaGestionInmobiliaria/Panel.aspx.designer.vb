@@ -192,4 +192,121 @@ Partial Public Class Panel
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents GridView1 As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control Panel2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Panel2 As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control TextBox5.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TextBox5 As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control TextBox6.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TextBox6 As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control TextBox7.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TextBox7 As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control TextBox8.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TextBox8 As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control DropDownList5.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents DropDownList5 As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control DropDownList6.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents DropDownList6 As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control Button13.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Button13 As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control Button10.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Button10 As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control Button11.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Button11 As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control Button12.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Button12 As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control SqlDataSource2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents SqlDataSource2 As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''Control GridView2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents GridView2 As Global.System.Web.UI.WebControls.GridView
 End Class
