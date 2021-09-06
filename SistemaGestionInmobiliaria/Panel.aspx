@@ -53,6 +53,15 @@
                 });
             });
 
+            $("#Button3").click(function (e) {
+                $("#menu").animate({
+                    opacity: 0,
+                    left: "0",
+                    width: "toggle"
+                }, 200, function () {
+                });
+            });
+
         });
 
     </script>
@@ -168,7 +177,7 @@
 
         }
 
-        function CheckGridList2(chckbx) {
+        function CheckGridList2(chckbx2) {            
             document.getElementById('TextBox5').value = null;
             document.getElementById('TextBox6').value = null;
             document.getElementById('TextBox7').value = null;
@@ -198,13 +207,13 @@
                             DropDown6.options[0].selected = true;
                             document.forms[0].elements[i].checked = false;
 
-                            var objGridview = chckbx.parentNode.parentNode.parentNode;
+                            var objGridview = chckbx2.parentNode.parentNode.parentNode;
                             var list = objGridview.getElementsByTagName("input");
 
                             for (var i = 0; i < list.length; i++) {
                                 var objRow = list[i].parentNode.parentNode;
-                                if (list[i].type == "checkbox" && chckbx != list[i]) {
-                                    if (chckbx.checked) {
+                                if (list[i].type == "checkbox" && chckbx2 != list[i]) {
+                                    if (chckbx2.checked) {
                                         list[i].checked = false;
                                     }
                                 }
@@ -212,7 +221,7 @@
                         }
                         else {
                             document.getElementById('Button10').style.display = "none";
-                            var row = chckbx.parentElement.parentElement.rowIndex;
+                            var row = chckbx2.parentElement.parentElement.rowIndex;
                             var Direccion = document.getElementById("GridView2").rows[row].cells[2].innerHTML;
                             var Localidad = document.getElementById("GridView2").rows[row].cells[3].innerHTML;
                             var Provincia = document.getElementById("GridView2").rows[row].cells[5].innerHTML;
@@ -251,16 +260,109 @@
 
         }
 
+        function CheckGridList3(chckbx3) {
+            //document.getElementById('TextBox5').value = null;
+            <%--document.getElementById('TextBox6').value = null;
+            document.getElementById('TextBox7').value = null;
+            document.getElementById('TextBox8').value = null;
+            var DropDown5 = document.getElementById("<%= DropDownList5.ClientID %>");
+            DropDown5.options[0].selected = true;
+            var DropDown6 = document.getElementById("<%= DropDownList6.ClientID %>");
+            DropDown6.options[0].selected = true;
+
+            document.getElementById('Button10').style.display = "block";
+
+            var count = 0;--%>
+            <%--for (i = 0; i < document.forms[0].elements.length; i++) {
+                if ((document.forms[0].elements[i].type == 'checkbox') &&
+                    (document.forms[0].elements[i].name.indexOf('SelectRow2') > -1)) {
+                    if (document.forms[0].elements[i].checked == true) {
+
+                        count++;
+                        if (count > 1) {
+                            document.getElementById('TextBox5').value = null;
+                            document.getElementById('TextBox6').value = null;
+                            document.getElementById('TextBox7').value = null;
+                            document.getElementById('TextBox8').value = null;
+                            var DropDown5 = document.getElementById("<%= DropDownList5.ClientID %>");
+                            DropDown5.options[0].selected = true;
+                            var DropDown6 = document.getElementById("<%= DropDownList6.ClientID %>");
+                            DropDown6.options[0].selected = true;
+                            document.forms[0].elements[i].checked = false;
+
+                            var objGridview = chckbx2.parentNode.parentNode.parentNode;
+                            var list = objGridview.getElementsByTagName("input");
+
+                            for (var i = 0; i < list.length; i++) {
+                                var objRow = list[i].parentNode.parentNode;
+                                if (list[i].type == "checkbox" && chckbx2 != list[i]) {
+                                    if (chckbx2.checked) {
+                                        list[i].checked = false;
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            document.getElementById('Button10').style.display = "none";
+                            var row = chckbx2.parentElement.parentElement.rowIndex;
+                            var Direccion = document.getElementById("GridView2").rows[row].cells[2].innerHTML;
+                            var Localidad = document.getElementById("GridView2").rows[row].cells[3].innerHTML;
+                            var Provincia = document.getElementById("GridView2").rows[row].cells[5].innerHTML;
+                            var Estado = document.getElementById("GridView2").rows[row].cells[4].innerHTML;
+                            var Foto = document.getElementById("GridView2").rows[row].cells[6].innerHTML;
+                            var Propietario = document.getElementById("GridView2").rows[row].cells[7].innerHTML;
+
+                            document.getElementById("TextBox5").value = Direccion;
+                            document.getElementById("TextBox6").value = Localidad;
+                            document.getElementById("TextBox7").value = Provincia;
+                            document.getElementById("TextBox8").value = Foto;
+
+                            if (Estado == "ACTIVO") {
+                                DropDown5.options[1].selected = true;
+                            }
+                            else if (Estado == "INACTIVO") {
+                                DropDown5.options[2].selected = true;
+                            }
+
+                            DropDown6.textContent = "prueba"
+                        }
+                    }
+
+                    else {
+
+                    }
+                }
+            }--%>
+
+            //if (count > 1) {
+            //    return false;
+            //}
+            //else {
+            //    return true;
+            //}
+
+        }
+
         function showPanel1() {
             document.getElementById('closepanel').style.display = "table"; 
             document.getElementById('Panel1').style.display = "block";
             document.getElementById('Panel2').style.display = "none";
+            document.getElementById('Panel3').style.display = "none";
         }
 
         function showPanel2() {
             document.getElementById('closepanel').style.display = "table";
+            document.getElementById('Panel3').style.display = "none";
             document.getElementById('Panel2').style.display = "block";
-            document.getElementById('Panel1').style.display = "none";
+            document.getElementById('Panel1').style.display = "none";   
+            document.getElementById("Button13").click();
+        }
+
+        function showPanel3() {
+            document.getElementById('closepanel').style.display = "table";
+            document.getElementById('Panel3').style.display = "block";
+            document.getElementById('Panel2').style.display = "none";
+            document.getElementById('Panel1').style.display = "none";            
         }
 
         function hideallPanels() {
@@ -286,7 +388,7 @@
                     <div id="botonera" class="botonera">
                         <asp:Button ID="Button1" runat="server" Text="ABM PERSONAS" CssClass="boton_menu" OnClientClick="showPanel1(); return false" />
                         <asp:Button ID="Button2" runat="server" Text="ABM PROPIEDADES" CssClass="boton_menu" OnClientClick="showPanel2(); return false" />
-                        <asp:Button ID="Button3" runat="server" Text="CONTRATOS" CssClass="boton_menu" OnClientClick="return false" />
+                        <asp:Button ID="Button3" runat="server" Text="CONTRATOS" CssClass="boton_menu" OnClientClick="showPanel3(); return false" />
                         <asp:Button ID="Button4" runat="server" Text="COBRANZAS" CssClass="boton_menu" OnClientClick="return false" />
                         <asp:Button ID="Button5" runat="server" Text="USUARIOS" CssClass="boton_menu" OnClientClick="return false" />
                     </div>
@@ -447,6 +549,102 @@
                     </div>
 
                 </asp:Panel>
+
+                <%-- PANEL CONTRATOS --%>
+
+                <asp:Panel ID="Panel3" runat="server" class="aspnetpanel">
+
+                    <div id="contratos" class="panel">
+
+                        <div class="panel_titulo"><a>CONTRATOS</a></div>                        
+
+                        <div id="contenedor_campos3" class="contenedor_campos2">
+
+                            <asp:Label ID="Label1" runat="server" CssClass="label" Text="Inicio"></asp:Label>
+                            <asp:TextBox ID="TextBox9" runat="server" CssClass="campo_fecha" TextMode="Date"></asp:TextBox>
+                            <asp:Label ID="Label2" runat="server" CssClass="label" Text="Vencimiento"></asp:Label>
+                            <asp:TextBox ID="TextBox13" runat="server" CssClass="campo_fecha" TextMode="Date"></asp:TextBox>
+                            <br />
+                            <asp:TextBox ID="TextBox10" runat="server" CssClass="campo" Placeholder="Importe mensual ($)" TextMode="Number"></asp:TextBox>                            
+                            <asp:TextBox ID="TextBox11" runat="server" CssClass="campo" Placeholder="Impuesto municipal ($)" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="TextBox12" runat="server" CssClass="campo" Placeholder="Observación"></asp:TextBox>
+                            <asp:TextBox ID="TextBox14" runat="server" CssClass="campo" Placeholder="Coeficiente"></asp:TextBox>
+                            <asp:DropDownList ID="DropDownList8" runat="server" CssClass="campo"></asp:DropDownList>
+                            <asp:DropDownList ID="DropDownList7" runat="server" CssClass="campo" OnSelectedIndexChanged="DropDownList7_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                            <asp:TextBox ID="TextBox15" runat="server" CssClass="campo" Placeholder="Dirección" ReadOnly="true"></asp:TextBox>
+                            <asp:TextBox ID="TextBox16" runat="server" CssClass="campo" Placeholder="Localidad" ReadOnly="true"></asp:TextBox>
+                            <asp:TextBox ID="TextBox17" runat="server" CssClass="campo" Placeholder="Provincia" ReadOnly="true"></asp:TextBox>
+                            <asp:TextBox ID="TextBox18" runat="server" CssClass="campo" Placeholder="Honorarios ($)" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="TextBox19" runat="server" CssClass="campo" Placeholder="Deposito ($)" TextMode="Number"></asp:TextBox>                           
+                            <asp:Button ID="Button15" runat="server" Text="DAR ALTA" CssClass="boton_ingresar2" OnClick="Button15_Click" />
+
+                        </div>
+
+                        <div class="contenedor_acciones2">
+                            <asp:Button ID="Button16" runat="server" Text="ELIMINAR" CssClass="boton_borrar" OnClick="Button11_Click" />
+                            <asp:Button ID="Button17" runat="server" Text="EDITAR" CssClass="boton_editar" OnClick="Button12_Click" />                            
+                        </div>
+
+                        <div id="contenedor_gridview3" class="contenedor_gridview">                            
+
+                            <asp:SqlDataSource ID="SqlDataSource3" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT * FROM [Contratos] ORDER BY DIRECCION ASC" runat="server"></asp:SqlDataSource>
+                            <asp:GridView ID="GridView3" runat="server" DataSourceID="SqlDataSource3" Visible="true" CssClass="gridview1" AutoGenerateColumns="false" HeaderStyle-CssClass="gridview_header" BorderColor="White">
+                                <Columns>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="SelectRow3" runat="server" AutoPostBack="false" OnClick="CheckGridList3(this);" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField ReadOnly="true" DataField="Id" HeaderText="ID" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="false" DataField="INICIO" HeaderText="INICIO" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="false" DataField="VENCIMIENTO" HeaderText="VENCIMIENTO" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="IMPORTE_MENSUAL" HeaderText="MENSUAL" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="false" DataField="IMPORTE_IMPUESTOM" HeaderText="IMPUESTO MUNICIPAL" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="OBSERVACION" HeaderText="OBSERVACION" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="COEFICIENTE" HeaderText="COEFICIENTE" Visible="True" ItemStyle-CssClass="grid_row">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="PROPIETARIO" HeaderText="PROPIETARIO" Visible="True" ItemStyle-CssClass="grid_row">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="INQUILINO" HeaderText="INQUILINO" Visible="True" ItemStyle-CssClass="grid_row">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="DIRECCION" HeaderText="DIRECCION" Visible="True" ItemStyle-CssClass="grid_row">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="LOCALIDAD" HeaderText="LOCALIDAD" Visible="True" ItemStyle-CssClass="grid_row">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="PROVINCIA" HeaderText="PROVINCIA" Visible="True" ItemStyle-CssClass="grid_row">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="HONORARIOS" HeaderText="HONORARIOS" Visible="True" ItemStyle-CssClass="grid_row">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="DEPOSITO" HeaderText="DEPOSITO" Visible="True" ItemStyle-CssClass="grid_row">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+
+                    </div>
+
+                </asp:Panel>
+
             </div>
         </div>
     </form>

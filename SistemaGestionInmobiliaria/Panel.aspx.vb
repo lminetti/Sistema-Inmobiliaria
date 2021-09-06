@@ -4,6 +4,8 @@ Imports System.Data.SqlClient
 Public Class Panel
     Inherits System.Web.UI.Page
 
+    Dim constr As String = ConfigurationManager.ConnectionStrings("InmCamiletti").ConnectionString
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If DirectCast(Session("usuario"), String) = "" Then
             Response.Redirect("Index.aspx")
@@ -12,7 +14,6 @@ Public Class Panel
 
             If Not Page.IsPostBack Then
                 'Populate DropDownList Propietarios
-                Dim constr As String = ConfigurationManager.ConnectionStrings("InmCamiletti").ConnectionString
                 Using con As New SqlConnection(constr)
                     Using cmd As New SqlCommand("SELECT Id, Nombre FROM Personas WHERE Tipo = 'PROPIETARIO' AND Estado = 'ACTIVO' ORDER BY Nombre ASC")
                         cmd.CommandType = CommandType.Text
@@ -26,6 +27,36 @@ Public Class Panel
                     End Using
                 End Using
                 DropDownList6.Items.Insert(0, New ListItem("Propietario", "0"))
+
+                'Populate DropDownList Propiedades e Inquilinos (en contratos)
+                Using con As New SqlConnection(constr)
+                    Using cmd As New SqlCommand("SELECT Id, DIRECCION FROM Propiedades WHERE ESTADO = 'ACTIVO' ORDER BY Direccion ASC")
+                        cmd.CommandType = CommandType.Text
+                        cmd.Connection = con
+                        con.Open()
+                        DropDownList7.DataSource = cmd.ExecuteReader()
+                        DropDownList7.DataTextField = "Direccion"
+                        DropDownList7.DataValueField = "Id"
+                        DropDownList7.DataBind()
+                        con.Close()
+                    End Using
+                End Using
+                DropDownList7.Items.Insert(0, New ListItem("Propiedades", "0"))
+
+                Using con As New SqlConnection(constr)
+                    Using cmd As New SqlCommand("SELECT Id, Nombre FROM Personas WHERE Tipo = 'INQUILINO' AND Estado = 'ACTIVO' ORDER BY Nombre ASC")
+                        cmd.CommandType = CommandType.Text
+                        cmd.Connection = con
+                        con.Open()
+                        DropDownList8.DataSource = cmd.ExecuteReader()
+                        DropDownList8.DataTextField = "Nombre"
+                        DropDownList8.DataValueField = "Id"
+                        DropDownList8.DataBind()
+                        con.Close()
+                    End Using
+                End Using
+                DropDownList8.Items.Insert(0, New ListItem("Inquilinos", "0"))
+
             End If
 
         End If
@@ -465,5 +496,26 @@ Public Class Panel
         End Using
         DropDownList6.Items.Insert(0, New ListItem("Propietario", "0"))
         ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel2').style.display = 'block';", True)
+    End Sub
+
+    Protected Sub Button15_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Protected Sub DropDownList7_SelectedIndexChanged(sender As Object, e As EventArgs)
+        SqlDataSource2.SelectCommand = "SELECT * FROM [Propiedades] WHERE Estado = 'ACTIVO' AND DIRECCION = '" & DropDownList7.SelectedItem.Text & "'"
+        GridView2.DataBind()
+        'Completar campos y volver a filtrar
+        TextBox15.Text = GridView2.Rows(0).Cells(2).Text
+        TextBox16.Text = GridView2.Rows(0).Cells(3).Text
+        TextBox17.Text = GridView2.Rows(0).Cells(4).Text
+
+        SqlDataSource2.SelectCommand = "SELECT * FROM [Propiedades] Order By DIRECCION ASC"
+        GridView2.DataBind()
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel3').style.display = 'block';", True)
+    End Sub
+
+    Protected Sub DropDownList8_SelectedIndexChanged(sender As Object, e As EventArgs)
+
     End Sub
 End Class

@@ -1,4 +1,34 @@
-﻿body {
+﻿:root {
+    --code-color: darkred;
+    --code-bg-color: #aaaaaa;
+    --code-font-size: 14px;
+    --code-line-height: 1.4;
+    --scroll-bar-color: #c5c5c5;
+    --scroll-bar-bg-color: #f6f6f6;
+}
+::-webkit-scrollbar-corner { background: rgba(0,0,0,0.5); }
+
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--scroll-bar-color) var(--scroll-bar-bg-color);
+    }
+
+    /* Works on Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: var(--scroll-bar-bg-color);
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: var(--scroll-bar-color);
+        border-radius: 20px;
+        border: 3px solid var(--scroll-bar-bg-color);
+    }
+body {
     margin: 0;
     font-family: 'Segoe UI';
     background-color:#eeeeee;
@@ -275,7 +305,29 @@
     margin: 0 auto;
     border-bottom:1px solid #808080;
     height:30%;
+    max-height:30%;
+    overflow-y:scroll;
     position:relative;
+}
+.contenedor_campos2 {
+    width: 90%;
+    margin: 0 auto;
+    border-bottom: 1px solid #808080;
+    height: 40%;
+    max-height: 40%;
+    overflow-y: scroll;
+    position: relative;
+    margin-top:1%;
+}
+.label {
+    margin: 2%;
+    height: 40px;
+    outline: none;
+    border: none;
+    font-size: 14px;
+    color: #000;
+    text-align: left;
+    padding-left: 4px;
 }
 .campo {
     width: 20%;
@@ -293,6 +345,25 @@
 }
 .campo:hover{
     background-color: #fff;
+    transition: all 0.2s ease;
+}
+.campo_fecha {
+    width: 15%;
+    margin: 2%;
+    height: 40px;
+    background-color: #66ae63;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 5px #cecece;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    color: #000;
+    text-align: left;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.campo_fecha:hover{
+    background-color: #95e491;
     transition: all 0.2s ease;
 }
 .reload {
@@ -343,6 +414,27 @@
     background-color: #153913;
     transition: all 0.2s ease;
 }
+.boton_ingresar2 {
+    width: 20%;
+    height: 40px;
+    background-color: #236f1f;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 5px #cecece;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+    display:block;
+    margin:2%;
+    float:right;
+}
+.boton_ingresar2:hover{
+    background-color: #153913;
+    transition: all 0.2s ease;
+}
 .contenedor_gridview {
     width: 90%;
     margin: 0 auto;
@@ -373,6 +465,12 @@
     width:40%;
     right:5%;
     top:32%;
+}
+.contenedor_acciones2 {
+    position: absolute;
+    width: 40%;
+    right: 5%;
+    top: 43%;
 }
 .boton_editar {
     float: right;
