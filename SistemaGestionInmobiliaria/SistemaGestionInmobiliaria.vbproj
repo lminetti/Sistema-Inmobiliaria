@@ -92,13 +92,22 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Error.html" />
     <Content Include="Estilos.css" />
+    <Content Include="impresion.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="jquery.js" />
     <Content Include="Panel.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="impresion.aspx.designer.vb">
+      <DependentUpon>impresion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="impresion.aspx.vb">
+      <DependentUpon>impresion.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Index.aspx.designer.vb">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
