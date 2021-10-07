@@ -5,6 +5,10 @@ Public Class Panel
     Inherits System.Web.UI.Page
 
     Dim constr As String = ConfigurationManager.ConnectionStrings("InmCamiletti").ConnectionString
+    Dim MesDesdeLiq As Integer
+    Dim AñoDesdeLiq As Integer
+    Dim MesHastaLiq As Integer
+    Dim AñoHastaLiq As Integer
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If DirectCast(Session("usuario"), String) = "" Then
@@ -541,6 +545,7 @@ Public Class Panel
         Dim PROVINCIA As String
         Dim HONORARIOS As Double
         Dim DEPOSITO As Double
+        Dim ADMINISTRACION As Double
 
         If TextBox9.Text = "dd/mm/aaaa" Or TextBox9.Text = "" Or IsDBNull(TextBox9.Text) Then
             Label3.Text = "Ingrese una fecha de inicio de contrato"
@@ -587,6 +592,11 @@ Public Class Panel
             ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel3').style.display = 'block';", True)
             Exit Sub
         End If
+        If TextBox36.Text = "" Or Not IsNumeric(TextBox36.Text) Then
+            Label3.Text = "Ingrese valor de administracion"
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel3').style.display = 'block';", True)
+            Exit Sub
+        End If
 
         INICIO = CDate(TextBox9.Text).ToString("dd/MM/yyyy")
         VENCIMIENTO = CDate(TextBox13.Text).ToString("dd/MM/yyyy")
@@ -594,15 +604,16 @@ Public Class Panel
         IMPORTE_IMPUESTOM = CDbl(TextBox11.Text)
         OBSERVACION = TextBox12.Text
         COEFICIENTE = TextBox14.Text
-        PROPIETARIO = DropDownList7.SelectedItem.Text
+        PROPIETARIO = GridView2.Rows(0).Cells(7).Text
         INQUILINO = DropDownList8.SelectedItem.Text
         DIRECCION = TextBox15.Text
         LOCALIDAD = TextBox16.Text
         PROVINCIA = TextBox17.Text
         HONORARIOS = CDbl(TextBox18.Text)
         DEPOSITO = CDbl(TextBox19.Text)
+        ADMINISTRACION = CDbl(TextBox36.Text)
 
-        SqlDataSource3.InsertCommand = "INSERT INTO [Contratos] ([INICIO], [VENCIMIENTO], [IMPORTE_MENSUAL], [IMPORTE_IMPUESTOM], [OBSERVACION], [COEFICIENTE], [PROPIETARIO], [INQUILINO], [DIRECCION], [LOCALIDAD], [PROVINCIA], [HONORARIOS], [DEPOSITO]) VALUES (@INICIO, @VENCIMIENTO, @IMPORTE_MENSUAL, @IMPORTE_IMPUESTOM, @OBSERVACION, @COEFICIENTE, @PROPIETARIO, @INQUILINO, @DIRECCION, @LOCALIDAD, @PROVINCIA, @HONORARIOS, @DEPOSITO)"
+        SqlDataSource3.InsertCommand = "INSERT INTO [Contratos] ([INICIO], [VENCIMIENTO], [IMPORTE_MENSUAL], [IMPORTE_IMPUESTOM], [OBSERVACION], [COEFICIENTE], [PROPIETARIO], [INQUILINO], [DIRECCION], [LOCALIDAD], [PROVINCIA], [HONORARIOS], [DEPOSITO], [ADMINISTRACION]) VALUES (@INICIO, @VENCIMIENTO, @IMPORTE_MENSUAL, @IMPORTE_IMPUESTOM, @OBSERVACION, @COEFICIENTE, @PROPIETARIO, @INQUILINO, @DIRECCION, @LOCALIDAD, @PROVINCIA, @HONORARIOS, @DEPOSITO, @ADMINISTRACION)"
         SqlDataSource3.InsertParameters.Add("INICIO", (INICIO).ToString("MM/dd/yyyy hh:mm:ss"))
         SqlDataSource3.InsertParameters.Add("VENCIMIENTO", (VENCIMIENTO).ToString("MM/dd/yyyy hh:mm:ss"))
         SqlDataSource3.InsertParameters.Add("IMPORTE_MENSUAL", IMPORTE_MENSUAL)
@@ -616,6 +627,7 @@ Public Class Panel
         SqlDataSource3.InsertParameters.Add("PROVINCIA", PROVINCIA)
         SqlDataSource3.InsertParameters.Add("HONORARIOS", HONORARIOS)
         SqlDataSource3.InsertParameters.Add("DEPOSITO", DEPOSITO)
+        SqlDataSource3.InsertParameters.Add("ADMINISTRACION", ADMINISTRACION)
         SqlDataSource3.Insert()
 
         SqlDataSource3.SelectCommand = "SELECT * FROM [Contratos] ORDER BY Id DESC"
@@ -950,8 +962,11 @@ Public Class Panel
 
 
         Concepto = TextBox22.Text
+        Importe = TextBox23.Text
         If Concepto = "Alquiler" Then
-            Concepto = Concepto & " mes " & TextBox25.Text & "/" & TextBox26.Text
+            Concepto = Concepto & " mes " & TextBox25.Text & "/" & TextBox26.Text & " $" & Importe.ToString("F2")
+        Else
+            Concepto = Concepto & " $" & Importe.ToString("F2")
         End If
 
         If GridView5.Rows.Count > 0 Then
@@ -1063,7 +1078,11 @@ Public Class Panel
         Numero = CInt(GridView8.Rows(0).Cells(1).Text) + 1
         Tipo = "ReciboCobranza"
         Cliente = TextBox21.Text
-        Documento = GridView6.Rows(0).Cells(2).Text
+        If TextBox21.Text = "" Or GridView6.Rows.Count = 0 Then
+            Documento = "0"
+        Else
+            Documento = GridView6.Rows(0).Cells(2).Text
+        End If
 
         For Each row As GridViewRow In GridView5.Rows
             Dim suma As Decimal = Convert.ToDecimal(row.Cells(2).Text)
@@ -1082,6 +1101,314 @@ Public Class Panel
         SqlDataSource10.Insert()
         GridView9.DataBind()
 
+        Session("impresion") = "SI"
+        Session("letra") = "X"
+        Session("Numero") = "0000-" & Numero.ToString("D8")
+        Session("codigo") = "DOCUMENTO NO VALIDO COMO FACTURA"
+        Session("compte") = "RECIBO"
+        Session("fecha") = Fecha.ToString("dd/MM/yyyy")
+        Session("cliente") = "Señor/a: " & HttpUtility.HtmlDecode(Cliente)
+        'Session("domicilio") = GridView6.Rows(0).Cells(2).Text
+        'Session("localidad") = GridView6.Rows(0).Cells(2).Text
+        Dim ListaConceptos As String = ""
+        If GridView5.Rows.Count > 1 Then
+            For i As Integer = 0 To GridView5.Rows.Count - 1
+                ListaConceptos = ListaConceptos & GridView5.Rows(i).Cells(1).Text & Environment.NewLine
+            Next i
+            Session("concepto") = HttpUtility.HtmlDecode(ListaConceptos)
+        Else
+            Session("concepto") = HttpUtility.HtmlDecode(GridView5.Rows(0).Cells(1).Text)
+        End If
+        Session("total") = "Total: $" & Total.ToString("F2")
+
+        'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "alert('" & ListaConceptos & "');", True)
+
+        Response.Write("<script>window.open('impresion.aspx','_blank');</script>")
+
+        SqlDataSource6.SelectCommand = "SELECT TOP 0 * FROM [Detalle_Cobranzas]"
+        GridView5.DataBind()
+
+        'Update en detalle de contrato
+        For Each row As GridViewRow In GridView5.Rows
+            If row.Cells(1).Text.Contains("Alquiler") Then
+
+                Dim startString As String = row.Cells(1).Text
+                Dim tempParts As String()
+                Dim testValue As String
+                Dim tempDate As DateTime
+                Dim CurrentMes As Integer
+                Dim CurrentAño As Integer
+
+                tempParts = startString.Split(" ")
+
+                For Each testValue In tempParts
+                    If DateTime.TryParse(testValue, tempDate) = True Then
+                        Dim fecha1 As String
+                        fecha1 = CDate(String.Format("{0}", tempDate)).ToString("MM/yyyy")
+                        CurrentMes = fecha1.Substring(2)
+                        CurrentAño = fecha1.Substring(fecha1.Length - 4)
+                    End If
+                Next
+
+                Dim m As Match = Regex.Match(row.Cells(1).Text, "\b$\d+")
+                Dim PAGADO As Double = CDbl(m.Value)
+                Dim SALDO As Double
+                SALDO -= PAGADO
+
+                SqlDataSource8.UpdateCommand = "UPDATE [Detalle_Contratos] SET [PAGADO] = " & PAGADO & ", [SALDO] = " & SALDO & " WHERE NUMERO = " & GridView7.Rows(0).Cells(1).Text & " AND MES = " & CurrentMes & " AND AÑO = " & CurrentAño & ""
+                SqlDataSource8.InsertParameters.Add("PAGADO", PAGADO)
+                SqlDataSource8.InsertParameters.Add("SALDO", SALDO)
+                SqlDataSource8.Update()
+            End If
+        Next
+
+        GridView7.DataBind()
+
+        TextBox21.Text = ""
+        TextBox22.Text = ""
+        TextBox23.Text = ""
+        TextBox25.Text = ""
+        TextBox26.Text = ""
+        TextBox27.Text = "$0,00"
+        DropDownList9.SelectedValue = 0
+
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel4').style.display = 'block';", True)
+
+    End Sub
+
+    Protected Sub Button24_Click(sender As Object, e As EventArgs)
+
+        For Each gvrow As GridViewRow In GridView10.Rows
+            Dim chk As CheckBox = CType(gvrow.FindControl("SelectRow5"), CheckBox)
+
+            If chk IsNot Nothing And chk.Checked Then
+
+                If GridView11.Rows.Count = 0 Then
+                    SqlDataSource12.SelectCommand = "SELECT * FROM [Detalle_Cobranzas] WHERE NUMERO = " & CInt(gvrow.Cells(4).Text) & ""
+                    GridView11.DataBind()
+                End If
+
+                If GridView10.Rows.Count > 0 Then
+
+                    Session("impresion") = "SI"
+                    Session("letra") = "X"
+                    Session("Numero") = "0000-" & CInt(gvrow.Cells(4).Text).ToString("D8")
+                    Session("codigo") = "DOCUMENTO NO VALIDO COMO FACTURA"
+                    Session("compte") = "RECIBO"
+                    Session("fecha") = CDate(gvrow.Cells(2).Text).ToString("dd/MM/yyyy")
+                    Session("cliente") = "Señor/a: " & gvrow.Cells(6).Text
+                    'Session("domicilio") = GridView6.Rows(0).Cells(2).Text
+                    'Session("localidad") = GridView6.Rows(0).Cells(2).Text
+                    Dim ListaConceptos As String = ""
+                    If GridView11.Rows.Count > 1 Then
+                        For i As Integer = 0 To GridView11.Rows.Count - 1
+                            ListaConceptos = ListaConceptos & GridView11.Rows(i).Cells(2).Text & Environment.NewLine
+                        Next i
+                        Session("concepto") = ListaConceptos
+                    Else
+                        Session("concepto") = GridView11.Rows(0).Cells(2).Text
+                    End If
+                    Session("total") = "Total: $" & CDbl(gvrow.Cells(10).Text).ToString("F2")
+
+                    Response.Write("<script>window.open('impresion.aspx','_blank');</script>")
+
+                End If
+
+
+            End If
+        Next
+
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel5').style.display = 'block';", True)
+
+    End Sub
+
+    Protected Sub TextBox28_TextChanged(sender As Object, e As EventArgs)
+        SqlDataSource11.SelectCommand = "SELECT * FROM [Cobranzas] WHERE CLIENTE LIKE '" & TextBox28.Text & "%' ORDER BY FECHA DESC"
+        GridView10.DataBind()
+
+        If GridView10.Rows.Count > 0 Then
+            SqlDataSource12.SelectCommand = "SELECT * FROM [Detalle_Cobranzas] WHERE NUMERO = " & CInt(GridView10.Rows(0).Cells(4).Text) & ""
+            GridView11.DataBind()
+        End If
+
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel5').style.display = 'block';", True)
+    End Sub
+
+    Protected Sub TextBox31_TextChanged(sender As Object, e As EventArgs)
+
+        SqlDataSource15.SelectCommand = "SELECT * FROM [Contratos] WHERE DIRECCION LIKE '" & TextBox31.Text & "%'"
+        GridView14.DataBind()
+
+        TextBox33.Text = GridView14.Rows(0).Cells(9).Text
+        TextBox32.Text = GridView14.Rows(0).Cells(7).Text
+        If Not IsDBNull(GridView14.Rows(0).Cells(14).Text) Then
+            TextBox38.Text = GridView14.Rows(0).Cells(14).Text
+        ElseIf GridView14.Rows(0).Cells(14).Text = " " Or GridView14.Rows(0).Cells(14).Text = "" Or GridView14.Rows(0).Cells(14).Text = "&nbsp;" Then
+            TextBox38.Text = "0,00"
+        End If
+
+        If TextBox38.Text = "&nbsp;" Then
+            TextBox38.Text = "0,00"
+        End If
+
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel7').style.display = 'block';", True)
+
+    End Sub
+
+    Protected Sub Button25_Click(sender As Object, e As EventArgs)
+
+        'Ingresa detalle a liquidación
+        Dim Numero As Integer
+        Dim Concepto As String
+        Dim Importe As Double
+        Dim Fecha As DateTime
+        Dim Cliente As String
+
+        If GridView5.Rows.Count = 0 Then
+            'Identificar último número
+            If TextBox25.Visible = True Then
+                If IsNumeric(TextBox25.Text) And IsNumeric(TextBox26.Text) Then
+                    SqlDataSource9.SelectCommand = "SELECT TOP 10 * FROM [Detalle_Cobranzas] ORDER BY NUMERO DESC"
+                    GridView8.DataBind()
+                End If
+            Else
+                SqlDataSource9.SelectCommand = "SELECT TOP 10 * FROM [Detalle_Cobranzas] ORDER BY NUMERO DESC"
+                GridView8.DataBind()
+            End If
+            If GridView8.Rows.Count > 0 Then
+                'Asigna número
+                Numero = CInt(GridView8.Rows(0).Cells(1).Text) + 1
+            Else
+                'Primera cobranza
+                Numero = 1
+            End If
+        Else
+            Numero = CInt(GridView8.Rows(0).Cells(1).Text) + 1
+        End If
+
+        Dim Total As Double
+
+        If GridView13.Rows.Count > 1 Then
+            For Each row As GridViewRow In GridView5.Rows
+                If Not row.Cells(8).Text = "0,00" Then
+                    Dim suma As Decimal = Convert.ToDecimal(row.Cells(8).Text)
+                    Total += suma
+                End If
+            Next
+            Concepto = MesDesdeLiq & "/" & AñoDesdeLiq & " a " & MesHastaLiq & "/" & AñoHastaLiq & " - $" & Total.ToString("F2")
+        ElseIf GridView13.Rows.Count = 1 Then
+            Total = CDbl(GridView13.Rows(0).Cells(8).Text).ToString("F2")
+            Concepto = MesDesdeLiq & "/" & AñoDesdeLiq & " a " & MesHastaLiq & "/" & AñoHastaLiq & " - $" & Total.ToString("F2")
+        ElseIf GridView13.Rows.Count = 0 Then
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel7').style.display = 'block';", True)
+            Exit Sub
+        End If
+
+        Importe = Total
+
+        If Importe = 0 Then
+            ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel7').style.display = 'block';", True)
+            Exit Sub
+        End If
+
+        Cliente = TextBox32.Text
+        Fecha = DateTime.Now.ToString("dd/MM/yyyy")
+
+        SqlDataSource17.InsertCommand = "INSERT INTO [Detalle_Cobranzas] ([Numero], [Concepto], [Importe], [Fecha], [Cliente]) VALUES (@Numero, @Concepto, @Importe, @Fecha, @Cliente)"
+        SqlDataSource17.InsertParameters.Add("Numero", Numero)
+        SqlDataSource17.InsertParameters.Add("Concepto", Concepto)
+        SqlDataSource17.InsertParameters.Add("Importe", Importe)
+        SqlDataSource17.InsertParameters.Add("Fecha", Fecha.ToString("MM/dd/yyyy"))
+        SqlDataSource17.InsertParameters.Add("Cliente", Cliente)
+        SqlDataSource17.Insert()
+
+        SqlDataSource17.SelectCommand = "SELECT * FROM [Detalle_Cobranzas] WHERE NUMERO = " & Numero & " ORDER BY Id ASC"
+        GridView16.DataBind()
+
+        Dim Total2 As Double
+        For Each row As GridViewRow In GridView16.Rows
+            Dim suma As Decimal = Convert.ToDecimal(row.Cells(2).Text)
+            Total2 += suma
+        Next
+
+        Total2 = Total2 - CDbl(TextBox38.Text)
+        TextBox37.Text = "$" & Total2.ToString("F2")
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel7').style.display = 'block';", True)
+
+    End Sub
+
+    Protected Sub Button26_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Protected Sub Button27_Click(sender As Object, e As EventArgs)
+        'Ingreso cobranza e imprimo
+
+        If GridView16.Rows.Count = 0 Then
+            Exit Sub
+        End If
+
+        Dim Fecha As DateTime
+        Dim Numero As Integer
+        Dim Tipo As String
+        Dim Cliente As String
+        Dim Documento As String
+        Dim Total As Double
+
+        SqlDataSource13.SelectCommand = "SELECT * FROM [Personas] WHERE NOMBRE = '" & TextBox32.Text & "' AND TIPO = 'PROPIETARIO'"
+        GridView12.DataBind()
+
+        Fecha = DateTime.Now.ToString("dd/MM/yyyy")
+        Numero = CInt(GridView8.Rows(0).Cells(1).Text) + 1
+        Tipo = "Liquidacion"
+        Cliente = TextBox32.Text
+        Documento = GridView12.Rows(0).Cells(2).Text
+
+        Dim Total2 As Double
+        For Each row As GridViewRow In GridView16.Rows
+            Dim suma As Decimal = Convert.ToDecimal(row.Cells(2).Text)
+            Total2 += suma
+        Next
+
+        Total = Total2
+        Total2 = Total2 - CDbl(TextBox38.Text)
+
+        'Guarda datos en cobranzas
+        SqlDataSource16.InsertCommand = "INSERT INTO [Cobranzas] ([Fecha], [PDV], [Numero], [Tipo], [Cliente], [Documento], [Total]) VALUES (@Fecha, @PDV, @Numero, @Tipo, @Cliente, @Documento, @Total)"
+        SqlDataSource16.InsertParameters.Add("Fecha", Fecha.ToString("MM/dd/yyyy"))
+        SqlDataSource16.InsertParameters.Add("PDV", 1)
+        SqlDataSource16.InsertParameters.Add("Numero", Numero)
+        SqlDataSource16.InsertParameters.Add("Tipo", Tipo)
+        SqlDataSource16.InsertParameters.Add("Cliente", Cliente)
+        SqlDataSource16.InsertParameters.Add("Documento", Documento)
+        SqlDataSource16.InsertParameters.Add("Total", Total2)
+        SqlDataSource16.Insert()
+        GridView15.DataBind()
+
+        Session("impresion") = "SI"
+        Session("letra") = "X"
+        Session("Numero") = "0000-" & Numero.ToString("D8")
+        Session("codigo") = "DOCUMENTO NO VALIDO COMO FACTURA"
+        Session("compte") = "LIQUIDACION"
+        Session("fecha") = Fecha.ToString("dd/MM/yyyy")
+        Session("cliente") = "Señor/a: " & Cliente
+        'Session("domicilio") = GridView6.Rows(0).Cells(2).Text
+        'Session("localidad") = GridView6.Rows(0).Cells(2).Text
+        Dim ListaConceptos As String = ""
+        If GridView16.Rows.Count > 1 Then
+            For i As Integer = 0 To GridView16.Rows.Count - 1
+                ListaConceptos = ListaConceptos & GridView16.Rows(i).Cells(1).Text & Environment.NewLine
+            Next i
+            Session("concepto") = ListaConceptos
+        Else
+            Session("concepto") = GridView16.Rows(0).Cells(1).Text
+        End If
+        Session("total") = "Total liquidación: $" & Total.ToString("F2") & Environment.NewLine & "Honorarios: $" & CDbl(TextBox38.Text).ToString("F2") & Environment.NewLine & "Total pagado: $" & Total2.ToString("F2")
+
+        'ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "alert('" & ListaConceptos & "');", True)
+
+        Response.Write("<script>window.open('impresion.aspx','_blank');</script>")
+
         SqlDataSource6.SelectCommand = "SELECT TOP 0 * FROM [Detalle_Cobranzas]"
         GridView5.DataBind()
 
@@ -1090,9 +1417,45 @@ Public Class Panel
         TextBox23.Text = ""
         TextBox25.Text = ""
         TextBox26.Text = ""
+        TextBox27.Text = "$0,00"
         DropDownList9.SelectedValue = 0
 
-        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel4').style.display = 'block';", True)
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel7').style.display = 'block';", True)
+
+    End Sub
+
+    Protected Sub TextBox35_TextChanged(sender As Object, e As EventArgs)
+
+        If TextBox34.Text = "" Or TextBox34.Text = "dd/mm/aaaa" Then
+            Exit Sub
+        End If
+
+        Dim Desde As DateTime
+        Dim Hasta As DateTime
+
+        Dim Mes_desde As Integer
+        Dim Año_desde As Integer
+        Dim Mes_hasta As Integer
+        Dim Año_hasta As Integer
+
+        Desde = CDate(TextBox34.Text).ToString("dd/MM/yyyy")
+        Hasta = CDate(TextBox35.Text).ToString("dd/MM/yyyy")
+
+        Mes_desde = Desde.Month
+        Año_desde = Desde.Year
+
+        Mes_hasta = Hasta.Month
+        Año_hasta = Hasta.Year
+
+        SqlDataSource14.SelectCommand = "SELECT * FROM [Detalle_Contratos] WHERE NUMERO = '" & GridView14.Rows(0).Cells(0).Text & "' AND MES >= " & Mes_desde & " AND AÑO >= " & Año_desde & " AND MES <= " & Mes_hasta & " AND AÑO <= " & Año_hasta & ""
+        GridView13.DataBind()
+
+        MesDesdeLiq = Mes_desde
+        AñoDesdeLiq = Año_desde
+        MesHastaLiq = Mes_hasta
+        AñoDesdeLiq = Año_hasta
+
+        ScriptManager.RegisterStartupScript(Me, Me.GetType(), "Alerta", "document.getElementById('Panel7').style.display = 'block';", True)
 
     End Sub
 End Class

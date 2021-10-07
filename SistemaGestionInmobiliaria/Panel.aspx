@@ -80,6 +80,23 @@
                 });
             });
 
+            $("#Button23").click(function (e) {
+                $("#menu").animate({
+                    opacity: 0,
+                    left: "0",
+                    width: "toggle"
+                }, 200, function () {
+                });
+            });
+
+            $("#Button19").click(function (e) {
+                $("#menu").animate({
+                    opacity: 0,
+                    left: "0",
+                    width: "toggle"
+                }, 200, function () {
+                });
+            });
         });
 
     </script>
@@ -461,6 +478,53 @@
 
         }
 
+        function CheckGridList5(chckbx4) {
+
+            var count = 0;
+            for (i = 0; i < document.forms[0].elements.length; i++) {
+                if ((document.forms[0].elements[i].type == 'checkbox') &&
+                    (document.forms[0].elements[i].name.indexOf('SelectRow5') > -1)) {
+                    if (document.forms[0].elements[i].checked == true) {
+
+                        count++;
+                        if (count > 1) {
+
+                            document.forms[0].elements[i].checked = false;
+
+                            var objGridview = chckbx4.parentNode.parentNode.parentNode;
+                            var list = objGridview.getElementsByTagName("input");
+
+                            for (var i = 0; i < list.length; i++) {
+                                var objRow = list[i].parentNode.parentNode;
+                                if (list[i].type == "checkbox" && chckbx4 != list[i]) {
+                                    if (chckbx4.checked) {
+                                        list[i].checked = false;
+                                    }
+                                }
+                            }
+                        }
+                        else {
+
+                            var row = chckbx4.parentElement.parentElement.rowIndex;
+
+                        }
+                    }
+
+                    else {
+
+                    }
+                }
+            }
+
+            if (count > 1) {
+                return false;
+            }
+            else {
+                return true;
+            }
+
+        }
+
         function showPanel1() {
             document.getElementById('closepanel').style.display = "table";
             document.getElementById('Panel0').style.display = "none";
@@ -468,23 +532,29 @@
             document.getElementById('Panel2').style.display = "none";
             document.getElementById('Panel3').style.display = "none";
             document.getElementById('Panel6').style.display = "none";
+            document.getElementById('Panel7').style.display = "none";
+            document.getElementById('Panel5').style.display = "none";
             document.getElementById('Panel4').style.display = "none";
         }
 
         function showPanel2() {
             document.getElementById("Button13").click();
             document.getElementById('closepanel').style.display = "table";
+            document.getElementById('Panel7').style.display = "none";
             document.getElementById('Panel6').style.display = "none";
+            document.getElementById('Panel5').style.display = "none";
             document.getElementById('Panel4').style.display = "none";
             document.getElementById('Panel3').style.display = "none";
             document.getElementById('Panel2').style.display = "block";
             document.getElementById('Panel1').style.display = "none";
-            document.getElementById('Panel0').style.display = "none";            
+            document.getElementById('Panel0').style.display = "none";
         }
 
         function showPanel3() {
             document.getElementById('closepanel').style.display = "table";
+            document.getElementById('Panel7').style.display = "none";
             document.getElementById('Panel6').style.display = "none";
+            document.getElementById('Panel5').style.display = "none";
             document.getElementById('Panel4').style.display = "none";
             document.getElementById('Panel3').style.display = "block";
             document.getElementById('Panel2').style.display = "none";
@@ -495,7 +565,21 @@
         function showPanel4() {
             document.getElementById('closepanel').style.display = "table";
             document.getElementById('Panel4').style.display = "block";
+            document.getElementById('Panel5').style.display = "none";
             document.getElementById('Panel6').style.display = "none";
+            document.getElementById('Panel7').style.display = "none";
+            document.getElementById('Panel3').style.display = "none";
+            document.getElementById('Panel2').style.display = "none";
+            document.getElementById('Panel1').style.display = "none";
+            document.getElementById('Panel0').style.display = "none";
+        }
+
+        function showPanel5() {
+            document.getElementById('closepanel').style.display = "table";
+            document.getElementById('Panel5').style.display = "block";
+            document.getElementById('Panel4').style.display = "none";
+            document.getElementById('Panel6').style.display = "none";
+            document.getElementById('Panel7').style.display = "none";
             document.getElementById('Panel3').style.display = "none";
             document.getElementById('Panel2').style.display = "none";
             document.getElementById('Panel1').style.display = "none";
@@ -504,7 +588,21 @@
 
         function showPanel6() {
             document.getElementById('closepanel').style.display = "table";
+            document.getElementById('Panel7').style.display = "none";
             document.getElementById('Panel6').style.display = "block";
+            document.getElementById('Panel5').style.display = "none";
+            document.getElementById('Panel4').style.display = "none";
+            document.getElementById('Panel3').style.display = "none";
+            document.getElementById('Panel2').style.display = "none";
+            document.getElementById('Panel1').style.display = "none";
+            document.getElementById('Panel0').style.display = "none";
+        }
+
+        function showPanel7() {
+            document.getElementById('closepanel').style.display = "table";
+            document.getElementById('Panel7').style.display = "block";
+            document.getElementById('Panel6').style.display = "none";
+            document.getElementById('Panel5').style.display = "none";
             document.getElementById('Panel4').style.display = "none";
             document.getElementById('Panel3').style.display = "none";
             document.getElementById('Panel2').style.display = "none";
@@ -519,7 +617,9 @@
             document.getElementById('Panel2').style.display = "none";
             document.getElementById('Panel3').style.display = "none";
             document.getElementById('Panel4').style.display = "none";
+            document.getElementById('Panel5').style.display = "none";
             document.getElementById('Panel6').style.display = "none";
+            document.getElementById('Panel7').style.display = "none";
         }
 
         function ClearTextBox20() {
@@ -528,6 +628,14 @@
 
         function ClearTextBox24() {
             document.getElementById('TextBox24').value = "";
+        }
+
+        function ClearTextBox28() {
+            document.getElementById('TextBox28').value = "";
+        }
+
+        function ClearTextBox31() {
+            document.getElementById('TextBox31').value = "";
         }
 
     </script>
@@ -549,6 +657,8 @@
                         <asp:Button ID="Button2" runat="server" Text="ABM PROPIEDADES" CssClass="boton_menu" OnClientClick="showPanel2(); return false" />
                         <asp:Button ID="Button3" runat="server" Text="CONTRATOS" CssClass="boton_menu" OnClientClick="showPanel3(); return false" />
                         <asp:Button ID="Button4" runat="server" Text="COBRANZAS" CssClass="boton_menu" OnClientClick="showPanel4(); return false" />
+                        <asp:Button ID="Button19" runat="server" Text="DIARIO DE COBRANZAS" CssClass="boton_menu" OnClientClick="showPanel5(); return false" />
+                        <asp:Button ID="Button23" runat="server" Text="LIQUIDACIONES" CssClass="boton_menu" OnClientClick="showPanel7(); return false" />
                         <asp:Button ID="Button5" runat="server" Text="USUARIOS" CssClass="boton_menu" OnClientClick="showPanel6(); return false" />
                     </div>
                     <asp:Button ID="Button6" runat="server" Text="CERRAR SESION" CssClass="cerrar_sesion" OnClick="Button6_Click" />
@@ -569,7 +679,9 @@
                     <div id="panel0" class="panel">
                         <div class="panel_titulo"><a>GESTIÓN INMOBILIARIA</a></div>
 
-                        <div class="logo_panel0"><img src="Images/logo_big.png"/></div>
+                        <div class="logo_panel0">
+                            <img src="Images/logo_big.png" />
+                        </div>
                     </div>
 
                 </asp:Panel>
@@ -749,6 +861,7 @@
                             <asp:TextBox ID="TextBox17" runat="server" CssClass="campo" Placeholder="Provincia" ReadOnly="true"></asp:TextBox>
                             <asp:TextBox ID="TextBox18" runat="server" CssClass="campo" Placeholder="Honorarios ($)" TextMode="Number"></asp:TextBox>
                             <asp:TextBox ID="TextBox19" runat="server" CssClass="campo" Placeholder="Deposito ($)" TextMode="Number"></asp:TextBox>
+                            <asp:TextBox ID="TextBox36" runat="server" CssClass="campo" Placeholder="Administración ($)" TextMode="Number"></asp:TextBox>
                             <asp:Button ID="Button15" runat="server" Text="DAR ALTA" CssClass="boton_ingresar2" OnClick="Button15_Click" />
 
                         </div>
@@ -812,6 +925,9 @@
                                     <asp:BoundField ReadOnly="true" DataField="DEPOSITO" HeaderText="DEPOSITO" Visible="True" ItemStyle-CssClass="grid_row">
                                         <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
                                     </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="ADMINISTRACION" HeaderText="ADMINISTRACION" Visible="True" ItemStyle-CssClass="grid_row">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
                                 </Columns>
                             </asp:GridView>
                             <asp:SqlDataSource ID="SqlDataSource4" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 100 * FROM [Detalle_Contratos]" runat="server"></asp:SqlDataSource>
@@ -842,7 +958,7 @@
 
                         <div id="contenedor_campos5" class="contenedor_campos4">
 
-                            <asp:TextBox ID="TextBox21" runat="server" CssClass="campo" Placeholder="Inquilino" ReadOnly="true"></asp:TextBox>
+                            <asp:TextBox ID="TextBox21" runat="server" CssClass="campo" Placeholder="Inquilino" ReadOnly="false"></asp:TextBox>
                             <asp:DropDownList ID="DropDownList9" runat="server" CssClass="campo" OnSelectedIndexChanged="DropDownList9_SelectedIndexChanged" AutoPostBack="true">
                                 <asp:ListItem Text="Concepto" Value="0" />
                                 <asp:ListItem Text="Alquiler" Value="1" />
@@ -865,6 +981,137 @@
 
                             <asp:SqlDataSource ID="SqlDataSource6" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Detalle_Cobranzas] ORDER BY Id ASC" runat="server"></asp:SqlDataSource>
                             <asp:GridView ID="GridView5" runat="server" DataSourceID="SqlDataSource6" Visible="true" CssClass="gridview1" AutoGenerateColumns="false" HeaderStyle-CssClass="gridview_header" BorderColor="Black">
+                                <Columns>
+                                    <asp:BoundField ReadOnly="true" DataField="Id" HeaderText="ID" Visible="False" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="false" DataField="CONCEPTO" HeaderText="CONCEPTO" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="false" DataField="IMPORTE" HeaderText="IMPORTE" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="CLIENTE" HeaderText="CLIENTE" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                </Columns>
+                            </asp:GridView>
+
+                        </div>
+
+                    </div>
+
+                </asp:Panel>
+
+                <%-- PANEL DIARIO COBRANZAS --%>
+
+                <asp:Panel ID="Panel5" runat="server" class="aspnetpanel">
+
+                    <div id="diario" class="panel">
+
+                        <div class="panel_titulo"><a>DIARIO DE COBRANZAS</a></div>
+
+                        <asp:Button ID="Button24" runat="server" Text="REIMPRIMIR" CssClass="boton_ingresar3" OnClick="Button24_Click" />
+                        <asp:TextBox ID="TextBox28" runat="server" CssClass="buscar2" Placeholder="Buscar..." AutoPostBack="true" onclick="ClearTextBox28();" OnTextChanged="TextBox28_TextChanged"></asp:TextBox>
+
+                        <div id="contenedor_gridview6" class="contenedor_gridview4">
+
+                            <asp:SqlDataSource ID="SqlDataSource12" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Detalle_Cobranzas] ORDER BY Id ASC" runat="server"></asp:SqlDataSource>
+                            <asp:GridView ID="GridView11" runat="server" DataSourceID="SqlDataSource12" Visible="false" AutoGenerateColumns="true"></asp:GridView>
+                            <asp:SqlDataSource ID="SqlDataSource11" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 10 * FROM [Cobranzas] ORDER BY Id DESC" runat="server"></asp:SqlDataSource>
+                            <asp:GridView ID="GridView10" runat="server" DataSourceID="SqlDataSource11" Visible="true" CssClass="gridview1" AutoGenerateColumns="false" HeaderStyle-CssClass="gridview_header" BorderColor="White">
+                                <Columns>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="SelectRow5" runat="server" AutoPostBack="false" OnClick="CheckGridList5(this);" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField ReadOnly="true" DataField="Id" HeaderText="ID" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="false" DataField="FECHA" HeaderText="FECHA" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="false" DataField="PDV" HeaderText="PDV" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="NUMERO" HeaderText="NUMERO" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="TIPO" HeaderText="TIPO" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="CLIENTE" HeaderText="CLIENTE" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="DOMICILIO" HeaderText="DOMICILIO" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="LOCALIDAD" HeaderText="LOCALIDAD" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="PROVINCIA" HeaderText="PROVINCIA" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="TOTAL" HeaderText="TOTAL" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField ReadOnly="true" DataField="DOCUMENTO" HeaderText="DOCUMENTO" Visible="True" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
+                                        <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
+                                    </asp:BoundField>
+                                </Columns>
+                            </asp:GridView>
+
+                        </div>
+
+                    </div>
+
+                </asp:Panel>
+
+                <%-- PANEL LIQUIDACIONES --%>
+
+                <asp:Panel ID="Panel7" runat="server" class="aspnetpanel">
+
+                    <div id="liquidaciones" class="panel">
+
+                        <div class="panel_titulo"><a>LIQUIDACIONES</a></div>
+
+                        <br />
+                        <br />
+                        <asp:Label ID="Label7" runat="server" CssClass="label" Text="Desde"></asp:Label>
+                        <asp:TextBox ID="TextBox34" runat="server" CssClass="campo_fecha" TextMode="Date" AutoPostBack="false"></asp:TextBox>
+                        <asp:Label ID="Label9" runat="server" CssClass="label" Text="Hasta"></asp:Label>
+                        <asp:TextBox ID="TextBox35" runat="server" CssClass="campo_fecha" TextMode="Date" OnTextChanged="TextBox35_TextChanged" AutoPostBack="true"></asp:TextBox>                       
+
+                        <asp:TextBox ID="TextBox31" runat="server" CssClass="buscar2" Placeholder="Buscar propiedad..." AutoPostBack="true" onclick="ClearTextBox31();" OnTextChanged="TextBox31_TextChanged"></asp:TextBox>
+
+                        <asp:SqlDataSource ID="SqlDataSource13" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Personas] WHERE TIPO = 'PROPIETARIO' ORDER BY Id ASC" runat="server"></asp:SqlDataSource>
+                        <asp:GridView ID="GridView12" runat="server" DataSourceID="SqlDataSource13" Visible="false" AutoGenerateColumns="true"></asp:GridView>
+                        <asp:SqlDataSource ID="SqlDataSource14" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Detalle_Contratos]" runat="server"></asp:SqlDataSource>
+                        <asp:GridView ID="GridView13" runat="server" DataSourceID="SqlDataSource14" Visible="true" AutoGenerateColumns="true"></asp:GridView>
+                        <asp:SqlDataSource ID="SqlDataSource15" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Contratos]" runat="server"></asp:SqlDataSource>
+                        <asp:GridView ID="GridView14" runat="server" DataSourceID="SqlDataSource15" Visible="false" AutoGenerateColumns="true"></asp:GridView>
+                        <asp:SqlDataSource ID="SqlDataSource16" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Cobranzas]" runat="server"></asp:SqlDataSource>
+                        <asp:GridView ID="GridView15" runat="server" DataSourceID="SqlDataSource16" Visible="false" AutoGenerateColumns="true"></asp:GridView>
+
+                        <div id="contenedor_campos7" class="contenedor_campos5">
+
+                            <asp:TextBox ID="TextBox32" runat="server" CssClass="campo" Placeholder="Propietario" ReadOnly="true"></asp:TextBox>
+                            <asp:TextBox ID="TextBox33" runat="server" CssClass="campo" Placeholder="Propiedad" ReadOnly="true"></asp:TextBox>
+                            <asp:TextBox ID="TextBox38" runat="server" CssClass="campo" Placeholder="Administración" ReadOnly="true"></asp:TextBox>
+                            <asp:Button ID="Button25" runat="server" Text="INGRESAR" CssClass="boton_ingresar2" OnClick="Button25_Click" />
+                            <asp:Label ID="Label6" runat="server" CssClass="label_alerta2" Text=""></asp:Label>
+
+                        </div>
+
+                        <asp:Button ID="Button26" runat="server" Text="REINICIAR" CssClass="boton_reiniciar" OnClick="Button26_Click" />
+                        <asp:Button ID="Button27" runat="server" Text="FINALIZAR" CssClass="boton_finalizar" OnClick="Button27_Click" />
+                        <asp:TextBox ID="TextBox37" runat="server" CssClass="total" Placeholder="$0,00" ReadOnly="true"></asp:TextBox>
+
+                        <div id="contenedor_gridview7" class="contenedor_gridview5">
+
+                            <asp:SqlDataSource ID="SqlDataSource17" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Detalle_Cobranzas] ORDER BY Id ASC" runat="server"></asp:SqlDataSource>
+                            <asp:GridView ID="GridView16" runat="server" DataSourceID="SqlDataSource17" Visible="true" CssClass="gridview1" AutoGenerateColumns="false" HeaderStyle-CssClass="gridview_header" BorderColor="Black">
                                 <Columns>
                                     <asp:BoundField ReadOnly="true" DataField="Id" HeaderText="ID" Visible="False" ItemStyle-CssClass="grid_row" HeaderStyle-CssClass="gridview_header">
                                         <ItemStyle CssClass="col" Wrap="false"></ItemStyle>
