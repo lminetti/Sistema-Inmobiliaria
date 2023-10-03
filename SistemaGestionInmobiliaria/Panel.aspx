@@ -311,6 +311,7 @@
             document.getElementById('TextBox17').value = null;
             document.getElementById('TextBox18').value = null;
             document.getElementById('TextBox19').value = null;
+            document.getElementById('TextBox36').value = null;
             var DropDown8 = document.getElementById("<%= DropDownList8.ClientID %>");
             DropDown8.options[0].selected = true;
             var DropDown7 = document.getElementById("<%= DropDownList7.ClientID %>");
@@ -338,6 +339,7 @@
                             document.getElementById('TextBox17').value = null;
                             document.getElementById('TextBox18').value = null;
                             document.getElementById('TextBox19').value = null;
+                            document.getElementById('TextBox36').value = null;
                             var DropDown8 = document.getElementById("<%= DropDownList8.ClientID %>");
                             DropDown8.options[0].selected = true;
                             var DropDown7 = document.getElementById("<%= DropDownList7.ClientID %>");
@@ -377,6 +379,7 @@
                             var Provincia = document.getElementById("GridView3").rows[row].cells[12].innerHTML;
                             var Honorarios = parseFloat(document.getElementById("GridView3").rows[row].cells[13].innerHTML.replace(',', '.'));
                             var Deposito = parseFloat(document.getElementById("GridView3").rows[row].cells[14].innerHTML.replace(',', '.'));
+                            var Administracion = parseFloat(document.getElementById("GridView3").rows[row].cells[15].innerHTML.replace(',', '.'));
                             var Inquilino = document.getElementById("GridView3").rows[row].cells[9].innerHTML;
                             var Propiedad = document.getElementById("GridView3").rows[row].cells[10].innerHTML;
 
@@ -395,6 +398,7 @@
                             document.getElementById('TextBox17').value = Provincia;
                             document.getElementById('TextBox18').value = Honorarios;
                             document.getElementById('TextBox19').value = Deposito;
+                            document.getElementById('TextBox36').value = Administracion;
 
                         }
                     }
@@ -636,6 +640,19 @@
 
         function ClearTextBox31() {
             document.getElementById('TextBox31').value = "";
+        }
+
+        function showOtrosConceptos() {
+            var gridView = document.getElementById('<%= GridView16.ClientID %>');
+            if (gridView) {
+                document.getElementById('otrosconceptos').style.display = "block";
+            } else {
+                alert("Por favor ingresar liquidación antes.");
+            }
+        }
+
+        function hideOtrosConceptos() {
+            document.getElementById('otrosconceptos').style.display = "none";
         }
 
     </script>
@@ -938,7 +955,7 @@
 
                 </asp:Panel>
 
-                <%-- PANEL COBRANZAS --%>
+                <%-- PANEL COBRANZAS  --%>
 
                 <asp:Panel ID="Panel4" runat="server" class="aspnetpanel">
 
@@ -949,8 +966,6 @@
                         <asp:TextBox ID="TextBox24" runat="server" CssClass="buscar2" Placeholder="Buscar inquilino (nombre o documento)..." AutoPostBack="true" onclick="ClearTextBox24();" OnTextChanged="TextBox24_TextChanged"></asp:TextBox>
                         <asp:SqlDataSource ID="SqlDataSource7" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Personas] WHERE TIPO = 'INQUILINO' ORDER BY Id ASC" runat="server"></asp:SqlDataSource>
                         <asp:GridView ID="GridView6" runat="server" DataSourceID="SqlDataSource7" Visible="false" AutoGenerateColumns="true"></asp:GridView>
-                        <asp:SqlDataSource ID="SqlDataSource8" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Detalle_Contratos]" runat="server"></asp:SqlDataSource>
-                        <asp:GridView ID="GridView7" runat="server" DataSourceID="SqlDataSource8" Visible="false" AutoGenerateColumns="true"></asp:GridView>
                         <asp:SqlDataSource ID="SqlDataSource9" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Detalle_Cobranzas]" runat="server"></asp:SqlDataSource>
                         <asp:GridView ID="GridView8" runat="server" DataSourceID="SqlDataSource9" Visible="false" AutoGenerateColumns="true"></asp:GridView>
                         <asp:SqlDataSource ID="SqlDataSource10" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Cobranzas]" runat="server"></asp:SqlDataSource>
@@ -963,6 +978,7 @@
                                 <asp:ListItem Text="Concepto" Value="0" />
                                 <asp:ListItem Text="Alquiler" Value="1" />
                                 <asp:ListItem Text="Otros" Value="2" />
+                                <asp:ListItem Text="Impuesto municipal" Value="3" />
                             </asp:DropDownList>
                             <asp:TextBox ID="TextBox22" runat="server" CssClass="campo" Placeholder="Concepto" AutoPostBack="false" onkeydown="return (event.keyCode!=13);"></asp:TextBox>
                             <asp:TextBox ID="TextBox25" runat="server" CssClass="campo" Placeholder="Mes" Visible="false" AutoPostBack="false" onkeydown="return (event.keyCode!=13);"></asp:TextBox>
@@ -1081,14 +1097,14 @@
                         <asp:Label ID="Label7" runat="server" CssClass="label" Text="Desde"></asp:Label>
                         <asp:TextBox ID="TextBox34" runat="server" CssClass="campo_fecha" TextMode="Date" AutoPostBack="false"></asp:TextBox>
                         <asp:Label ID="Label9" runat="server" CssClass="label" Text="Hasta"></asp:Label>
-                        <asp:TextBox ID="TextBox35" runat="server" CssClass="campo_fecha" TextMode="Date" OnTextChanged="TextBox35_TextChanged" AutoPostBack="true"></asp:TextBox>                       
+                        <asp:TextBox ID="TextBox35" runat="server" CssClass="campo_fecha" TextMode="Date" OnTextChanged="TextBox35_TextChanged" AutoPostBack="true"></asp:TextBox>
 
                         <asp:TextBox ID="TextBox31" runat="server" CssClass="buscar2" Placeholder="Buscar propiedad..." AutoPostBack="true" onclick="ClearTextBox31();" OnTextChanged="TextBox31_TextChanged"></asp:TextBox>
 
-                        <asp:SqlDataSource ID="SqlDataSource13" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Personas] WHERE TIPO = 'PROPIETARIO' ORDER BY Id ASC" runat="server"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource13" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Personas]" runat="server"></asp:SqlDataSource>
                         <asp:GridView ID="GridView12" runat="server" DataSourceID="SqlDataSource13" Visible="false" AutoGenerateColumns="true"></asp:GridView>
                         <asp:SqlDataSource ID="SqlDataSource14" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Detalle_Contratos]" runat="server"></asp:SqlDataSource>
-                        <asp:GridView ID="GridView13" runat="server" DataSourceID="SqlDataSource14" Visible="true" AutoGenerateColumns="true"></asp:GridView>
+                        <asp:GridView ID="GridView13" runat="server" DataSourceID="SqlDataSource14" Visible="false" AutoGenerateColumns="true"></asp:GridView>
                         <asp:SqlDataSource ID="SqlDataSource15" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Contratos]" runat="server"></asp:SqlDataSource>
                         <asp:GridView ID="GridView14" runat="server" DataSourceID="SqlDataSource15" Visible="false" AutoGenerateColumns="true"></asp:GridView>
                         <asp:SqlDataSource ID="SqlDataSource16" ConnectionString="<%$ ConnectionStrings:InmCamiletti %>" ProviderName="<%$ ConnectionStrings:InmCamiletti.ProviderName %>" SelectCommand="SELECT TOP 0 * FROM [Cobranzas]" runat="server"></asp:SqlDataSource>
@@ -1099,8 +1115,17 @@
                             <asp:TextBox ID="TextBox32" runat="server" CssClass="campo" Placeholder="Propietario" ReadOnly="true"></asp:TextBox>
                             <asp:TextBox ID="TextBox33" runat="server" CssClass="campo" Placeholder="Propiedad" ReadOnly="true"></asp:TextBox>
                             <asp:TextBox ID="TextBox38" runat="server" CssClass="campo" Placeholder="Administración" ReadOnly="true"></asp:TextBox>
+                            <asp:TextBox ID="TextBox39" runat="server" CssClass="campo" Placeholder="Inquilino" ReadOnly="true"></asp:TextBox>
                             <asp:Button ID="Button25" runat="server" Text="INGRESAR" CssClass="boton_ingresar2" OnClick="Button25_Click" />
                             <asp:Label ID="Label6" runat="server" CssClass="label_alerta2" Text=""></asp:Label>
+                            <div class="boton_otros" onclick="showOtrosConceptos();"><a>OTROS CONCEPTOS</a></div>
+
+                            <div id="otrosconceptos" class="otrosconceptos">
+                                <div class="cerrar" onclick="hideOtrosConceptos();"><a>X</a></div>
+                                <asp:TextBox ID="TextBox41" runat="server" CssClass="campo" Placeholder="Concepto" ReadOnly="false"></asp:TextBox>
+                                <asp:TextBox ID="TextBox42" runat="server" CssClass="campo" Placeholder="Importe" ReadOnly="false"></asp:TextBox>
+                                <asp:Button ID="Button28" runat="server" Text="AGREGAR" CssClass="boton_ingresar2" OnClick="Button28_Click" />
+                            </div>
 
                         </div>
 

@@ -599,24 +599,6 @@ Partial Public Class Panel
     Protected WithEvents GridView6 As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
-    '''Control SqlDataSource8.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents SqlDataSource8 As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''Control GridView7.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents GridView7 As Global.System.Web.UI.WebControls.GridView
-
-    '''<summary>
     '''Control SqlDataSource9.
     '''</summary>
     '''<remarks>
@@ -986,6 +968,15 @@ Partial Public Class Panel
     Protected WithEvents TextBox38 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control TextBox39.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TextBox39 As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''Control Button25.
     '''</summary>
     '''<remarks>
@@ -1002,6 +993,33 @@ Partial Public Class Panel
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents Label6 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control TextBox41.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TextBox41 As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control TextBox42.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TextBox42 As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control Button28.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Button28 As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control Button26.

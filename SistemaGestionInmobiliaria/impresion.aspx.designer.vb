@@ -68,6 +68,15 @@ Partial Public Class impresion
     Protected WithEvents TextBoxCliente As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control TextBoxInquilino.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TextBoxInquilino As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''Control TextBoxConcepto.
     '''</summary>
     '''<remarks>
@@ -129,6 +138,15 @@ Partial Public Class impresion
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents TextBoxCliente_2 As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control TextBoxInquilino_2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TextBoxInquilino_2 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Control TextBoxConcepto_2.

@@ -33,6 +33,59 @@ body {
     font-family: 'Segoe UI';
     background-color:#eeeeee;
 }
+.cerrar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 50px;
+    height: 20px;
+    width: 20px;
+    display: table;
+    text-align: center;
+    font-size: 14px;
+    background-color: #fff;
+    color: #000;
+    box-shadow: 0px 0px 5px #cecece;
+    font-weight:700;
+    cursor:pointer;
+}
+.cerrar a{
+    display:table-cell;
+    vertical-align:middle;
+}
+.otrosconceptos {
+    position: absolute;
+    width: 50%;
+    height: 30vh;
+    left: 25%;
+    top: 25%;
+    display: none;
+    background-color: #fff;
+    border:1px solid #000;
+    z-index:1000;
+}
+.boton_otros {
+    width: 20%;
+    height: 40px;
+    background-color: #1e1e1e;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 5px #cecece;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+    margin: 2%;
+    margin-top: -1%;
+    float: left;
+    display:table;
+}
+.boton_otros a{
+    display:table-cell;
+    vertical-align:middle;
+}
 .error {
     border: none;
     outline: none;
@@ -431,6 +484,13 @@ body {
     box-shadow: 0px 0px 7px #808080;
     transition: all 0.2s ease;
 }
+#TextBox41 {
+    margin-top: 12vh;
+    width: 40%;
+}
+#TextBox42 {
+    margin-top: 12vh;
+}
 .campo {
     width: 20%;
     margin:2%;
@@ -531,11 +591,15 @@ body {
     font-weight: 600;
     display:block;
     margin:2%;
+    margin-top:-1%;
     float:right;
 }
 .boton_ingresar2:hover{
     background-color: #153913;
     transition: all 0.2s ease;
+}
+#Button28 {
+    margin-top: 12vh;
 }
 .boton_ingresar3 {
     width: 20%;
@@ -550,10 +614,10 @@ body {
     text-align: center;
     cursor: pointer;
     font-weight: 600;
-    display:block;
-    position:absolute;
-    bottom:2.5%;
-    right:5%;
+    display: block;
+    position: absolute;
+    bottom: 2.5%;
+    right: 5%;
 }
 .boton_ingresar3:hover{
     background-color: #153913;
@@ -603,7 +667,7 @@ body {
     width: 90%;
     margin: 0 auto;
     margin-top: 1%;
-    height: 40%;
+    height: 35%;
     max-height: 50%;
     overflow: auto;
     box-shadow: 0px 0px 5px #cecece;
@@ -900,12 +964,14 @@ body {
     position:absolute;
     top:2%;
     right:2%;
-    width:33%;
+    width:60%;
     text-align:left;
     border:none;
     outline:none;
-    font-size:18px;
-    font-weight:600;
+    font-size:14px;
+    font-weight:700;
+    resize:none;
+    font-family:'Segoe UI';
 }
 .impresion_firma {
     position: absolute;
